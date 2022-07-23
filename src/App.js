@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import React, { useState } from "react";
+import { Row, Col, Container } from "react-bootstrap";
+import AddUserForm from "./components/AddUserForm";
+import Card from "react-bootstrap/Card";
+import AllUsers from "./components/AllUsers";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [users, setUsers] = useState([
+		{ name: "John", email: "jon@gmail.com", gen: "4" },
+		{ name: "Ama", email: "ama@gmail.com", gen: "4" },
+    { name: "Ama", email: "gmail.com", gen: "4" },
+	]);
+	return (
+		<>
+			<Container>
+				<Row>
+					<Col md={6}>
+						<AddUserForm />
+					</Col>
+
+					<Col md={6}>
+						<AllUsers userData={users} />
+					</Col>
+				</Row>
+			</Container>
+		</>
+	);
 }
 
 export default App;
