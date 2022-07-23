@@ -6,6 +6,13 @@ function AddUserForm(props) {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [gen, setGen] = useState("");
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		props.newUser({ name, email, gen });
+		setName("");
+		setEmail("");
+		setGen("");
+	};
 
 	return (
 		<Form>
@@ -41,7 +48,7 @@ function AddUserForm(props) {
 				/>
 			</Form.Group>
 
-			<Button onClick={props.newUser} variant="primary" type="submit">
+			<Button onClick={handleSubmit} variant="primary" type="submit">
 				Submit
 			</Button>
 		</Form>

@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import Card from "react-bootstrap/Card";
+import { Card, Button } from "react-bootstrap";
 
 function AllUsers(props) {
 	return (
@@ -13,8 +12,12 @@ function AllUsers(props) {
 								Email:{item.email}
 							</Card.Subtitle>
 							<Card.Text>Gen :{item.gen}</Card.Text>
-							<Card.Link href="#">Card Link</Card.Link>
-							<Card.Link href="#">Another Link</Card.Link>
+							<Button variant="primary" href="#">
+								Edit
+							</Button>
+							<Button variant="danger" href="#">
+								Delete Me
+							</Button>
 						</Card.Body>
 					</Card>
 				);
