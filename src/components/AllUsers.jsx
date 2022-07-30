@@ -7,7 +7,14 @@ function AllUsers(props) {
 			<Container>
 				<Row>
 					{props.userData.map((item, index) => {
-						return <User key={index}userInfo={item} />;
+						return (
+							<User
+								key={index}
+								userInfo={item}
+								deleteUser={props.deleteUser}
+								editUser={props.editUser}
+							/>
+						);
 					})}
 				</Row>
 			</Container>
