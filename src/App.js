@@ -16,6 +16,7 @@ function App() {
 			id: "090390kiocjifiorhi4",
 		},
 	]);
+	//add new user to the users array(state)
 	const AddNewUser = (user) => {
 		user.id = Math.random().toString(36);
 		setUsers([
@@ -24,8 +25,12 @@ function App() {
 		]);
 		console.log(user);
 	};
+	//delete user from users array
 	const deleteUser = (id) => {
+		//tenary operator to delete user from users array
 		setUsers(users.filter((user) => user.id !== id));
+
+		//normal if else statement to delete user from users array
 		// setUsers(
 		// 	users.filter((user) => {
 		// 		if (user.id !== id) {
@@ -34,6 +39,7 @@ function App() {
 		// 	})
 		// );
 	};
+	//edits user in users array
 	const handleEdit = (id, newInfo) => {
 		// setUsers(
 		// 	users.map((user) => {
