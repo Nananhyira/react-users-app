@@ -8,7 +8,7 @@ function App() {
 	const [users, setUsers] = useState([
 		{ name: "John", email: "jon@gmail.com", gen: "4", id: "edjjdjdjdjdkskw" },
 		{ name: "Ama", email: "ama@gmail.com", gen: "48", id: "udiue9893e03-kked" },
-		{ name: "Ama", email: "gmail.com", gen: "40", id: "uuueiriedm003wwsw" },
+		{ name: "tony", email: "gmail.com", gen: "40", id: "uuueiriedm003wwsw" },
 		{
 			name: "kachi ",
 			email: "kachigmail.com",
@@ -18,7 +18,10 @@ function App() {
 	]);
 	const AddNewUser = (user) => {
 		user.id = Math.random().toString(36);
-		setUsers([...users, { name: user.name, email: user.email, gen: user.gen }]);
+		setUsers([
+			...users,
+			{ id: user.id, name: user.name, email: user.email, gen: user.gen },
+		]);
 		console.log(user);
 	};
 	const deleteUser = (id) => {
@@ -32,14 +35,15 @@ function App() {
 		// );
 	};
 	const handleEdit = (id, newInfo) => {
-		setUsers(
-			users.map((user) => {
-				if (user.id === id) {
-					return newInfo;
-				}
-				return user;
-			})
-		);
+		// setUsers(
+		// 	users.map((user) => {
+		// 		if (user.id !== id) {
+		// 			return user;
+		// 		}
+		// 		return newInfo;
+		// 	})
+		// );
+		setUsers(users.map((user) => (user.id === id ? newInfo : user)));
 	};
 	return (
 		<>
