@@ -41,6 +41,7 @@ function App() {
 	};
 	//edits user in users array
 	const handleEdit = (id, newInfo) => {
+		//normal if else statement to delete user from users array
 		// setUsers(
 		// 	users.map((user) => {
 		// 		if (user.id !== id) {
@@ -49,6 +50,7 @@ function App() {
 		// 		return newInfo;
 		// 	})
 		// );
+		//tenary operator to edit user from users array
 		setUsers(users.map((user) => (user.id === id ? newInfo : user)));
 	};
 	return (
