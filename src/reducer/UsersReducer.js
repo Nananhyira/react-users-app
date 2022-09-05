@@ -1,6 +1,6 @@
 import { v4 as uuid } from "uuid";
 let initialState = {
-	users: [
+	det: [
 		{ name: "John", email: "jon@gmail.com", gen: "4", id: uuid() },
 		{ name: "Ama", email: "ama@gmail.com", gen: "48", id: uuid() },
 		{ name: "tony", email: "gmail.com", gen: "40", id: uuid() },
@@ -22,7 +22,7 @@ let initialState = {
 let UsersReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case "ADD_USER":
-			return { ...state, users: [...state.users, action.payload] };
+			return { ...state, det: [...state.det, action.payload] };
 
 		default:
 			return state;
