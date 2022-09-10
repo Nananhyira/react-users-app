@@ -1,14 +1,25 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { addUser } from "../actions/userActions";
+import { connect, useDispatch } from "react-redux";
+import { v4 as uuid } from "uuid";
 
 function AddUserForm(props) {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [gen, setGen] = useState("");
+	const dispatch = useDispatch();
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		props.newUser({ name, email, gen });
+		let userInfo = { id: uuid(), name, email, gen };
+
+		// props.addUser(userInfo);
+		//function to dispatch the action to the store use the useDispatch hook
+		dispatch(addUser(userInfo));
+		// console.log("====================================");
+		// console.log(userInfo);
+		// console.log("====================================");
 		setName("");
 		setEmail("");
 		setGen("");
@@ -55,4 +66,8 @@ function AddUserForm(props) {
 	);
 }
 
+// const mapDispatchToProps = {
+// 	addUser: addUser,
+// };
+// export default connect(null, mapDispatchToProps)(AddUserForm);
 export default AddUserForm;

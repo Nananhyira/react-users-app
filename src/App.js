@@ -5,8 +5,7 @@ import AddUserForm from "./components/AddUserForm";
 import AllUsers from "./components/AllUsers";
 
 function App() {
-	const [users, setUsers] = useState(
-		[
+	const [users, setUsers] = useState([
 		// { name: "John", email: "jon@gmail.com", gen: "4", id: "edjjdjdjdjdkskw" },
 		// { name: "Ama", email: "ama@gmail.com", gen: "48", id: "udiue9893e03-kked" },
 		// { name: "tony", email: "gmail.com", gen: "40", id: "uuueiriedm003wwsw" },
@@ -16,8 +15,7 @@ function App() {
 		// 	gen: "90",
 		// 	id: "090390kiocjifiorhi4",
 		// },
-	]
-	);
+	]);
 	//add new user to the users array(state)
 	const AddNewUser = (user) => {
 		user.id = Math.random().toString(36);
