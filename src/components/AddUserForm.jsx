@@ -4,22 +4,33 @@ import Form from "react-bootstrap/Form";
 import { addUser } from "../actions/userActions";
 import { connect, useDispatch } from "react-redux";
 import { v4 as uuid } from "uuid";
+import { doc, setDoc, serverTimestamp, timestamp } from "firebase/firestore";
+import { db } from "../firebase/config";
 
 function AddUserForm(props) {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [gen, setGen] = useState("");
 	const dispatch = useDispatch();
-	const handleSubmit = (e) => {
+
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		let userInfo = { id: uuid(), name, email, gen };
+		let userInfo = {
+			id: uuid(),
+			name,
+			email,
+			gen,
+			timestamp: serverTimestamp(),
+		};
+		try {
+			await setDoc(doc(db, "user", userInfo.id), userInfo);
+		} catch (e) {
+			console.log(e);
+		}
 
 		// props.addUser(userInfo);
 		//function to dispatch the action to the store use the useDispatch hook
-		dispatch(addUser(userInfo));
-		// console.log("====================================");
-		// console.log(userInfo);
-		// console.log("====================================");
+		// dispatch(addUser(userInfo));
 		setName("");
 		setEmail("");
 		setGen("");
