@@ -20,7 +20,7 @@ function App() {
 		try {
 			const readData = async () => {
 				const q = query(collection(db, "user"), orderBy("timestamp", "desc"));
-				const unsubscribe = onSnapshot(q, (querySnapshot) => {
+				const  unsubscribe =  await onSnapshot(q, (querySnapshot) => {
 					const users = [];
 					querySnapshot.forEach((doc) => {
 						users.push(doc.data());
@@ -28,11 +28,14 @@ function App() {
 					dispatch(addUser(users));
 					console.log(users);
 				});
+					
 			};
 			readData();
 		} catch (e) {
 			console.log(e);
+			
 		}
+		
 	}, []);
 	// const [users, setUsers] = useState([
 	// { name: "John", email: "jon@gmail.com", gen: "4", id: "edjjdjdjdjdkskw" },

@@ -3,6 +3,8 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useDispatch } from "react-redux";
 import { updateUser } from "../actions/userActions";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase/config";
 
 function EditUserForm(props) {
 	const [name, setName] = useState(props.userInfo.name);
@@ -10,11 +12,19 @@ function EditUserForm(props) {
 	const [gen, setGen] = useState(props.userInfo.gen);
 	const dispatch = useDispatch();
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		// props.editUser(props.userInfo.id, { name, email, gen });
 		let userInfo = { id: props.userInfo.id, name, email, gen };
-		dispatch(updateUser(userInfo));
+		// dispatch(updateUser(userInfo));
+		try {
+			const userRef = doc(db, "user", userInfo.id);
+			// Set the "capital" field of the city 'DC'
+			await updateDoc(userRef, userInfo);
+		} catch (e) {
+			console.log(e);
+		}
+
 		setName("");
 		setEmail("");
 		setGen("");
