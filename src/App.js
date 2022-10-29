@@ -10,9 +10,12 @@ import {
 	getDocs,
 	onSnapshot,
 } from "firebase/firestore";
-import { db } from "./firebase/config";
+import { onAuthStateChanged } from "firebase/auth";
+import { db, auth } from "./firebase/config";
 import { addUser } from "./actions/userActions";
 import { useDispatch } from "react-redux";
+import Routing from "./Routing";
+import { authUser } from "./actions/authActions";
 
 function App() {
 	const dispatch = useDispatch();
@@ -20,7 +23,7 @@ function App() {
 		try {
 			const readData = async () => {
 				const q = query(collection(db, "user"), orderBy("timestamp", "desc"));
-				const  unsubscribe =  await onSnapshot(q, (querySnapshot) => {
+				const unsubscribe = await onSnapshot(q, (querySnapshot) => {
 					const users = [];
 					querySnapshot.forEach((doc) => {
 						users.push(doc.data());
@@ -28,15 +31,22 @@ function App() {
 					dispatch(addUser(users));
 					console.log(users);
 				});
-					
 			};
 			readData();
 		} catch (e) {
 			console.log(e);
-			
 		}
-		
-	}, []);
+	}, [dispatch]);
+
+	useEffect(() => {
+		onAuthStateChanged(auth, (user) => {
+			if (user) {
+				dispatch(authUser(user));
+			} else {
+				dispatch(authUser(null));
+			}
+		});
+	}, [dispatch]);
 	// const [users, setUsers] = useState([
 	// { name: "John", email: "jon@gmail.com", gen: "4", id: "edjjdjdjdjdkskw" },
 	// { name: "Ama", email: "ama@gmail.com", gen: "48", id: "udiue9893e03-kked" },
@@ -99,7 +109,8 @@ function App() {
 	return (
 		<>
 			<Container>
-				<Row>
+				<Routing />
+				{/* <Row>
 					<Col>
 						<AddUserForm
 						// newUser={AddNewUser}
@@ -113,7 +124,7 @@ function App() {
 						// editUser={handleEdit}
 						/>
 					</Col>
-				</Row>
+				</Row> */}
 			</Container>
 		</>
 	);

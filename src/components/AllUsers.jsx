@@ -3,8 +3,8 @@ import User from "./User";
 import { connect, useSelector } from "react-redux";
 
 function AllUsers(props) {
-	const { users } = useSelector((state) => {
-		return state;
+	const  users  = useSelector((state) => {
+		return state.UsersReducer.users
 	});
 	return (
 		<>
@@ -13,7 +13,7 @@ function AllUsers(props) {
 					{users.map((item, index) => {
 						return (
 							<User
-								key={index}
+								key={item.id}
 								userInfo={item}
 								deleteUser={props.deleteUser}
 								editUser={props.editUser}
